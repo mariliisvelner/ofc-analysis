@@ -12,9 +12,12 @@ EPHYS_ATTRIBUTES = ["buttonpress_events_hg", "buttonpress_window_events_hg", "ga
 REGR_ATTRIBUTES = ["exputil", "gamble_ind", "loss_ind", "regret", "risk", "rpe", "win_ind", "winprob", "previous_exputil",
                    "previous_gamble_ind", "previous_loss_ind", "previous_regret", "previous_risk", "previous_rpe",
                    "previous_win_ind", "previous_winprob"]
+CURRENT_TRIAL_REGRESSORS = ["exputil", "gamble_ind", "loss_ind", "regret", "risk", "rpe", "win_ind", "winprob"]
+PREVIOUS_TRIAL_REGRESSORS = [ "previous_exputil", "previous_gamble_ind", "previous_loss_ind", "previous_regret",
+                         "previous_risk", "previous_rpe", "previous_win_ind", "previous_winprob"]
 
 N_ELEC = {"s1": 5, "s2": 6, "s3": 59, "s4": 5, "s5": 61, "s6": 7, "s7": 11, "s8": 10, "s9": 19, "s10": 16}
-
+N_TRIALS = {"s1": 180, "s2": 188, "s3": 194, "s4": 108, "s5": 179, "s6": 187, "s7": 181, "s8": 200, "s9": 200, "s10": 136}
 
 def get_ephys_data():
     ephys_data = {}
