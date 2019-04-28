@@ -13,9 +13,8 @@ DATA_REGR_DIR = "C:\\Users\\MariLiis\\Documents\\Ylikool\\Magister\\Thesis\\ofc-
 
 EPHYS_ATTRIBUTES = ["buttonpress_events_hg", "buttonpress_window_events_hg", "game_events_hg", "game_window_events_hg"]
 REGR_ATTRIBUTES = ["exputil", "gamble_ind", "loss_ind", "regret", "risk", "rpe", "win_ind", "winprob",
-                   "previous_exputil",
-                   "previous_gamble_ind", "previous_loss_ind", "previous_regret", "previous_risk", "previous_rpe",
-                   "previous_win_ind", "previous_winprob"]
+                   "previous_exputil", "previous_gamble_ind", "previous_loss_ind", "previous_regret", "previous_risk",
+                   "previous_rpe", "previous_win_ind", "previous_winprob"]
 CURRENT_TRIAL_REGRESSORS = ["exputil", "gamble_ind", "loss_ind", "regret", "risk", "rpe", "win_ind", "winprob"]
 PREVIOUS_TRIAL_REGRESSORS = ["previous_exputil", "previous_gamble_ind", "previous_loss_ind", "previous_regret",
                              "previous_risk", "previous_rpe", "previous_win_ind", "previous_winprob"]
