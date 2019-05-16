@@ -98,6 +98,7 @@ def bicocluster(data, n_clusters=5, svd_method="randomized", s_name=None, plot_r
         fit_data = fit_data[:, np.argsort(model.column_labels_)]
 
         img2 = axes[1].matshow(fit_data, cmap=plt.cm.Blues)
+        fig.colorbar(img2)
         if s_name is not None:
             axes[1].set_title("Subject %s, after biclustering; rearranged to show biclusters" % s_name)
         else:
@@ -143,7 +144,7 @@ def get_biclusters(data, row_labels, col_labels):
 
 
 """
-Return the ASR value for the given bicluster.
+Return the ASR (Average Spearman's Rho) value for the given bicluster.
 """
 def ASR(data, row_labels, col_labels):
     clusters = get_biclusters(data, row_labels, col_labels)
@@ -228,7 +229,7 @@ def get_bicluster_trials_elecs(tw_per_el, row_cl, col_cl, row_labels, col_labels
     return sorted_elecs[col_idx], sorted_trials[row_idx]
 
 
-def show_tsne_plot(data, plot_trials, n=20):
+def show_tsne_plot(data, behav_data, plot_trials, n=20):
     n_features = len(data[0])
 
     data_tsne = None
@@ -240,12 +241,27 @@ def show_tsne_plot(data, plot_trials, n=20):
 
     plt.figure(figsize=(10, 5))
     plt.subplot(121)
-    if plot_trials and len(data) > 2 * n:
-        # paint the first 20 trials green, the last 20 trials pink and all other trials blue
-        colors = ["green" for _ in range(n)] + ["blue" for _ in range(len(data) - 2 * n)] + ["pink" for _ in range(n)]
+    if n is not None:
+        if plot_trials and len(data) > 2 * n:
+            # paint the first 20 trials green, the last 20 trials pink and all other trials blue
+            colors = ["green" for _ in range(n)] + ["blue" for _ in range(len(data) - 2 * n)] + ["pink" for _ in range(n)]
+            plt.scatter(data_tsne[:, 0], data_tsne[:, 1], c=colors)
+        else:
+            plt.scatter(data_tsne[:, 0], data_tsne[:, 1])
+    elif plot_trials:  # plot win trials as green, loss as red, safe bet trials as blue
+        behav_data = behav_data[behav_data['trial.included'] == 1]
+        behav_data = behav_data.reset_index(drop=True)
+        loss_idx = behav_data[behav_data['outcome'] == 'Loss'].index
+        win_idx = behav_data[behav_data['outcome'] == 'Win'].index
+        colors = []
+        for i in range(len(data)):
+            color = "blue"
+            if i in loss_idx:
+                color = "red"
+            elif i in win_idx:
+                color = "green"
+            colors.append(color)
         plt.scatter(data_tsne[:, 0], data_tsne[:, 1], c=colors)
-    else:
-        plt.scatter(data_tsne[:, 0], data_tsne[:, 1])
     plt.show()
 
 
